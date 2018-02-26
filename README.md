@@ -1,21 +1,11 @@
 # FirmataExample
 
-**TODO: Add description**
+This is a repo for my talk at CODEBeamSF 2018, [Arduino, Elixir And Nerves: A Deep Dive Into the Firmata Protocol](https://www.codesync.global/speaker/christopher-cote/)
 
-## Installation
+It's currently just a small app that reads data from an ultrasonic distance sensor and outputs the data to a [NeoPixel](https://www.adafruit.com/category/168) in several different visualizations.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `firmata_example` to your list of dependencies in `mix.exs`:
+It also contains some simple animations for the NeoPixel, `follow` and `pulse`, written in Elixir.
 
-```elixir
-def deps do
-  [
-    {:firmata_example, "~> 0.1.0"}
-  ]
-end
-```
+All the Arduino code you need to run this example is in the `arduino` directory. Make sure to install all the libraries in the `libraries` directory into your Arduino IDE before compiling and flashing. Open `StandardFirmata` and compile and flash to your Arduino board.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/firmata_example](https://hexdocs.pm/firmata_example).
-
+![Demo Board](./images/demo_board.jpg)
