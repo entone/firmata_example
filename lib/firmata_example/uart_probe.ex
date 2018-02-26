@@ -5,7 +5,7 @@ defmodule FirmataExample.UARTProbe do
   @firmata "firmata"
 
   defmodule State do
-    defstruct [:firmata, pids: %{}]#, :ir_remote, :gateway
+    defstruct [:firmata, pids: %{}]
   end
 
   def devices(), do: GenServer.call(__MODULE__, :devices)

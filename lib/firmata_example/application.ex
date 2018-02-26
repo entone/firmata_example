@@ -4,7 +4,6 @@ defmodule FirmataExample.Application do
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
-    #{firmata_tty, _board} = firmata_tty()
     children = [
       worker(FirmataExample.UARTProbe, []),
       worker(FirmataExample.WaitForDevices, []),
