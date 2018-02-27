@@ -80,8 +80,8 @@ defmodule FirmataExample.NeoPixel do
 
   def handle_info(:watch, state) do
     val = FirmataExample.Distance.value()
-    diff = 196
-    multi = 100 / diff
+    diff = 196 #total distance of 200cm and a minimum of 4cm
+    multi = 100 / diff #max 100 brightness, 255 is crazy bright
     brightness = (val * multi) |> Float.floor |> round()
     brightness = [100, brightness] |> Enum.min()
     brightness = [1, brightness] |> Enum.max()
