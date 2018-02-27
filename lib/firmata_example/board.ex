@@ -19,7 +19,7 @@ defmodule FirmataExample.Board do
   def init(:ok) do
     tty = FirmataExample.UARTProbe.devices() |> Map.get(:firmata)
     Logger.debug "#{inspect tty}"
-    {:ok, firmata} = Firmata.Board.start_link(tty, [speed: 115200], :hardware_interface)
+    {:ok, firmata} = Firmata.Board.start_link(tty, [speed: 115200], FirmataExample.Firmata.Board)
     Logger.info "Firmata Started: #{inspect firmata}"
     Firmata.Board.sysex_write(firmata, @firmware_query, <<>>)
     {:ok, %State{firmata: firmata}}
