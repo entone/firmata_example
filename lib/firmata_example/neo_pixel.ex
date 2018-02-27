@@ -2,7 +2,7 @@ defmodule FirmataExample.NeoPixel do
   use GenServer
   require Logger
 
-  @pause 6
+  @pause 1
 
   defmodule Colors do
     defstruct [
@@ -37,10 +37,10 @@ defmodule FirmataExample.NeoPixel do
     Logger.info "NeoPixel Registered"
     colors = %Colors{}
     streams = %Streams{}
-    Process.send_after(self(), {:pulse, colors.red, 2}, @pause)
-    Process.send_after(self(), {:follow, streams.oranges, 5}, 3000)
-    Process.send_after(self(), {:follow, streams.blues, 5}, 9000)
-    Process.send_after(self(), {:watch_distance, colors.blue}, 15000)
+    Process.send_after(self(), {:pulse, colors.red, 4}, @pause)
+    Process.send_after(self(), {:follow, streams.oranges, 7}, 3000)
+    Process.send_after(self(), {:follow, streams.blues, 7}, 9000)
+    Process.send_after(self(), {:watch_distance, colors.blue}, 13000)
     Process.send_after(self(), {:tac, colors.green}, 25000)
     Logger.info "NeoPixel Started"
     {:ok, %{board: board, pin: pin, num_pixels: num_pixels, running: nil}}
@@ -59,8 +59,7 @@ defmodule FirmataExample.NeoPixel do
 
   def handle_info({:tac, color}, state) do
     val = FirmataExample.Distance.value()
-    val = [val, 100] |> Enum.min()
-    diff = 90
+    diff = 196
     multi = 11 / diff
     tac = (val * multi) |> Float.floor |> round()
     tac..12 |> Enum.each(fn i ->
@@ -128,7 +127,7 @@ defmodule FirmataExample.NeoPixel do
           board |> Firmata.Board.neopixel_brightness(0)
           :noop
         false ->
-          :timer.sleep(@pause)
+          :timer.sleep(5)
           do_follow(board, num_pixels, color, times, n_front, total)
       end
   end

@@ -15,7 +15,7 @@ defmodule FirmataExample.UARTProbe do
   end
 
   def init(:ok) do
-    uart_opts = [speed: 115200, active: true, framing: {Nerves.UART.Framing.Line, separator: "\n"}]
+    uart_opts = [speed: 57600, active: true, framing: {Nerves.UART.Framing.Line, separator: "\n"}]
     pids =
       Nerves.UART.enumerate() |> Enum.reduce(%{}, fn {k, v}, acc ->
         Logger.info "Open #{k}"

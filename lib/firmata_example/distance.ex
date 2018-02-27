@@ -32,14 +32,14 @@ defmodule FirmataExample.Distance do
         true -> data
         false -> 1
       end
-    state = %State{state | sensor_data: [ data | state.sensor_data ] |> Enum.slice(0, 60)}
+    state = %State{state | sensor_data: [ data | state.sensor_data ] |> Enum.slice(0, 10)}
     val =
       state.sensor_data
       |> Enum.sort()
-      |> Enum.drop(10)
-      |> Enum.drop(-10)
+      |> Enum.drop(1)
+      |> Enum.drop(-1)
       |> Enum.reduce(0, &+/2)
-      |> (&(&1 / 40)).()
+      |> (&(&1 / 8)).()
     {:noreply, %State{state | value: val / 50}}#Every 50uS PWM signal is low indicates 1cm distance. Default=50
   end
 
