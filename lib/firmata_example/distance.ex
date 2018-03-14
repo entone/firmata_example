@@ -39,8 +39,9 @@ defmodule FirmataExample.Distance do
       |> Enum.drop(1)
       |> Enum.drop(-1)
       |> Enum.reduce(0, &+/2)
-      |> (&(&1 / 8)).()
-    {:noreply, %State{state | value: val / 50}}#Every 50uS PWM signal is low indicates 1cm distance. Default=50
+      |> (&((&1 / 8) / 50)).()
+    Logger.info "Distance: #{val} cm"
+    {:noreply, %State{state | value: val}}#Every 50uS PWM signal is low indicates 1cm distance. Default=50
   end
 
   def handle_call(:value, _from, state) do

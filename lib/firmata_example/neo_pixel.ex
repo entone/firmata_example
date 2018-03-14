@@ -59,8 +59,9 @@ defmodule FirmataExample.NeoPixel do
 
   def handle_info({:tac, color}, state) do
     val = FirmataExample.Distance.value()
-    diff = 196
-    multi = 11 / diff
+    val = Enum.min([60, val])
+    diff = 60
+    multi = 12 / diff
     tac = (val * multi) |> Float.floor |> round()
     tac..12 |> Enum.each(fn i ->
       state.board |> Firmata.Board.neopixel(i, {0,0,0})
